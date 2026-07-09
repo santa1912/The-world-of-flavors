@@ -1,23 +1,29 @@
 <!DOCTYPE html>
-<html>
-  <head>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
     <title>The World of Flavors</title>
-    <link href="/styles.css" type="text/css" rel="stylesheet">
-  </head>
-  <body>
-    <div class="game-container">
-      <canvas class="game-canvas" width="352" height="198"></canvas>
+
+    <link rel="stylesheet" href="/styles.css">
+</head>
+
+<body>
+
+    <!-- LOGIN -->
+    <div id="loginScreen">
+
+        <img src="/images/logo.png" class="logo">
+
+        <button id="loginBtn">
+            Login with Google
+        </button>
+
     </div>
 
-    <!-- Scripts -->
-    <script src="/utils.js"></script>
-    <script src="/DirectionInput.js"></script>
-    <script src="/Overworld.js"></script>
-    <script src="/GameObject.js"></script>
-    <script src="/Person.js"></script>
-    <script src="/Sprite.js"></script>
-    <script src="/OverworldMap.js"></script>
-    <script src="/init.js"></script>
+    <!-- Firebase Login -->
+    <script type="module" src="/init.js"></script>
 
-  </body>
+</body>
+
 </html>

@@ -1,90 +1,47 @@
 class Overworld {
     constructor(config) {
         this.element = config.element;
+
         this.canvas = this.element.querySelector(".game-canvas");
+
+        // ตั้งค่าความละเอียด Canvas
+        this.canvas.width = 1920;
+        this.canvas.height = 1080;
+
         this.ctx = this.canvas.getContext("2d");
 
+        // ป้องกันภาพเบลอสำหรับ Pixel Art
+        this.ctx.imageSmoothingEnabled = false;
+
         this.map = null;
-
-        // Scene ปัจจุบัน
-        this.currentScene = "world";
-
-        // โหลดรูป Scene
-        this.worldImage = new Image();
-        this.worldImage.src = "/images/maps/Worldmap.png";
-
-        this.cityImage = new Image();
-        this.cityImage.src = "/images/maps/FlavoriaCity.png";
     }
+    
 
     startGameLoop() {
 
         const step = () => {
 
-            // ล้างหน้าจอ
+            // Clear Canvas
             this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
-            // -------------------------
-            // Scene : World Map
-            // -------------------------
-            if (this.currentScene === "world") {
+            // Draw Map
+            this.map.drawLowerImage(this.ctx);
 
-                const scale = Math.min(
-                    this.canvas.width / this.worldImage.width,
-                    this.canvas.height / this.worldImage.height
-                );
+            // Draw Objects
+            Object.values(this.map.gameObjects).forEach(object => {
 
-                const width = this.worldImage.width * scale;
-                const height = this.worldImage.height * scale;
-
-                const x = (this.canvas.width - width) / 2;
-                const y = (this.canvas.height - height) / 2;
-
-                this.ctx.drawImage(
-                    this.worldImage,
-                    x,
-                    y,
-                    width,
-                    height
-                );
-
-            }
-
-            // -------------------------
-            // Scene : Flavoria City
-            // -------------------------
-            else if (this.currentScene === "city") {
-
-                this.ctx.drawImage(
-                    this.cityImage,
-                    0,
-                    0,
-                    this.canvas.width,
-                    this.canvas.height
-                );
-
-            }
-
-            // -------------------------
-            // Scene : Game
-            // -------------------------
-            else {
-
-                this.map.drawLowerImage(this.ctx);
-
-                Object.values(this.map.gameObjects).forEach(object => {
-
-                    object.update({
-                        arrow: this.directionInput.direction
-                    });
-
-                    object.sprite.draw(this.ctx);
-
+                object.update({
+                    arrow: this.directionInput.direction
                 });
 
-                this.map.drawUpperImage(this.ctx);
+                object.sprite.draw(this.ctx);
 
-            }
+            });
+
+            // Draw Upper Layer
+            this.map.drawUpperImage(this.ctx);
+
+
 
             requestAnimationFrame(step);
 
@@ -96,31 +53,18 @@ class Overworld {
 
     init() {
 
-        // โหลดแผนที่จริงไว้ก่อน
+
         this.map = new OverworldMap(window.OverworldMaps.Kitchen);
 
         this.directionInput = new DirectionInput();
         this.directionInput.init();
 
-        // เปลี่ยน Scene เมื่อคลิก
-        this.canvas.addEventListener("click", () => {
 
-            if (this.currentScene === "world") {
-
-                this.currentScene = "city";
-
-            }
-
-            else if (this.currentScene === "city") {
-
-                this.currentScene = "game";
-
-            }
-
-        });
 
         this.startGameLoop();
 
     }
 
 }
+
+window.Overworld = Overworld;

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Flavoria Adventure</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+
+    <!-- Login Menu -->
+    <div id="menu" class="login-screen">
+
+
+        <div class="login-box">
+
+
+            <!-- Logo Game -->
+            <img src="assets/logo.png" class="game-logo" alt="Flavoria Adventure Logo">
+
+
+            <h1>
+                Flavoria Adventure
+            </h1>
+
+
+            <p>
+                Explore the world of Flavoria City
+            </p>
+
+
+
+            <!-- Google Login -->
+            <button id="loginBtn" class="google-btn">
+
+                <img src="assets/google-icon.png" alt="Google">
+
+                Login with Google
+
+            </button>
+
+
+
+            <!-- Logout -->
+            <button id="logoutBtn" class="logout-btn" style="display:none;">
+
+                Logout
+
+            </button>
+
+
+        </div>
+
+
+    </div>
+
+
+
+
+    <!-- Game Container -->
+
+    <div class="game-container">
+
+
+        <canvas id="gameCanvas"></canvas>
+
+
+    </div>
+
+
+
+    <!-- Firebase + Game Script -->
+
+    <script type="module" src="login.js"></script>
+    <script type="module" src="main.js"></script>
+
+
+</body>
+
+</html>
