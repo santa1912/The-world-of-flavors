@@ -15,19 +15,25 @@ class Overworld {
 
         this.map = null;
     }
-    
+
 
     startGameLoop() {
 
+        const SCALE = 4; // ปรับเป็น 2, 3, 4 ได้
+
         const step = () => {
 
-            // Clear Canvas
             this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
-            // Draw Map
+            this.ctx.save();
+
+            // ขยายทุกอย่าง
+            this.ctx.scale(SCALE, SCALE);
+
+            // วาดแผนที่
             this.map.drawLowerImage(this.ctx);
 
-            // Draw Objects
+            // วาดตัวละคร
             Object.values(this.map.gameObjects).forEach(object => {
 
                 object.update({
@@ -38,10 +44,10 @@ class Overworld {
 
             });
 
-            // Draw Upper Layer
+            // วาดชั้นบน
             this.map.drawUpperImage(this.ctx);
 
-
+            this.ctx.restore();
 
             requestAnimationFrame(step);
 

@@ -152,12 +152,16 @@ body {
 /* รูป World Map */
 
 #worldCanvas{
+    position:absolute;
+    top:0;
+    left:0;
+
+    width:100%;
+    height:100%;
 
     display:block;
 
-    width:100vw;
-    height:100vh;
-
+    z-index:1;
 }
 
 /* =========================
@@ -298,5 +302,42 @@ body {
         width: 180px;
 
     }
+
+}
+
+/* =========================
+   FLAG ANIMATION
+========================= */
+
+#castleFlag{
+    position:absolute;
+
+    left: calc(50% + 8px);
+    top: calc(50% - 40px);
+    transform:translate(-50%,-50%);
+
+    width:96px;
+    height:96px;
+
+    background-image:url("images/icons/flag.png");
+    background-repeat:no-repeat;
+
+    /* ย่อทั้งภาพให้สูง 96px */
+    background-size: 384px 96px;
+
+    animation:flagWave 0.8s steps(4) infinite;
+
+    z-index:99999;
+}
+
+@keyframes flagWave{
+    from{
+        background-position:0 0;
+    }
+
+    to{
+        background-position:-384px 0;
+    }
+    
 
 }
